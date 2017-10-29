@@ -1,0 +1,13 @@
+# This file is auto-generated during the composer install
+parameters:
+    psql_host: psql
+    psql_port: 5432
+    psql_name: app
+    psql_user: psql
+    psql_password: psql
+    secret: ThisTokenIsNotSoSecretChangeIt
+    pkeyvalue_host: pkeyvalue
+    pkeyvalue_port: 5432
+    pkeyvalue_name: pkeyvalue
+    pkeyvalue_user: pkeyvalue
+    pkeyvalue_password: pkeyvalue

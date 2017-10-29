@@ -1,0 +1,16 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+require "yaml"
+settings = YAML.load_file File.expand_path("settings.yml", File.dirname(__FILE__))
+shell_provider_path = File.expand_path("provider.sh", File.dirname(__FILE__))
+Vagrant.configure(2) do |config|
+    config.vm.define ENV["machine"] do |machine|
+        machine.vm.box = settings["parent_box"]
+        machine.vm.provision :shell do |provider|
+            provider.path = shell_provider_path
+            provider.privileged = true
+            provider.env = settings["provider_env"]
+        end
+    end
+end

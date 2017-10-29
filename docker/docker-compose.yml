@@ -1,0 +1,42 @@
+version: "2"
+services:
+    back:
+        build: ./php-fpm
+        depends_on: ["psql", "pkeyvalue"]
+        environment:
+            TERM: rxvt
+        hostname: back
+        ports:
+            - "9000:9000"
+        restart: always
+        volumes:
+            - ./../symfony:/usr/share/symfony
+    psql:
+        build: postgres
+        environment:
+            POSTGRES_PASSWORD: psql
+            POSTGRES_USER: psql
+        hostname: psql
+        ports:
+            - "5432:5432"
+        restart: always
+    pkeyvalue:
+        build: postgres
+        environment:
+            POSTGRES_PASSWORD: pkeyvalue
+            POSTGRES_USER: pkeyvalue
+        hostname: pkeyvalue
+        ports:
+            - "4432:5432"
+        restart: always
+    front:
+        build: ./nginx
+        depends_on: ["back"]
+        environment:
+            TERM: rxvt
+        hostname: front
+        ports:
+            - "80:80"
+        volumes_from:
+            - back
+        restart: always
