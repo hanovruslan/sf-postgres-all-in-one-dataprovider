@@ -1,0 +1,30 @@
+parameters:
+    app.security.user.class.token_user_provider: Evolaze\Paiod\AppBundle\Security\User\TokenUserProvider
+    app.security.guard.class.token_authenticator: Evolaze\Paiod\AppBundle\Security\Guard\TokenGuardAuthenticator
+    app.cache.adapter.class.pdo: Symfony\Component\Cache\Adapter\PdoAdapter
+    app.cache.provider.class.pkeyvalue: Evolaze\Paiod\AppBundle\Cache\Provider\PkeyvalueProvider
+    app.controller.class.default: Evolaze\Paiod\AppBundle\Controller\DefaultController
+
+services:
+    app.controller.default:
+        class: "%app.controller.class.default%"
+        arguments:
+            - "@app.cache.provider"
+    app.security.authenticator_token:
+        class: "%app.security.guard.class.token_authenticator%"
+    app.provider.user_token:
+        class: "%app.security.user.class.token_user_provider%"
+        arguments:
+            - "@doctrine.orm.psql_entity_manager"
+    app.cache.adapter.pdo:
+        class: "%app.cache.adapter.class.pdo%"
+        arguments:
+            - "pgsql:host=%pkeyvalue_host%;port=%pkeyvalue_port%;dbname=%pkeyvalue_name%"
+            - ""
+            - 0
+            - { "db_username": "%pkeyvalue_user%", "db_password": "%pkeyvalue_password%" }
+
+    app.cache.provider:
+        class: "%app.cache.provider.class.pkeyvalue%"
+        arguments:
+            - "@app.cache.adapter.pdo"

@@ -1,0 +1,24 @@
+doctrine:
+    dbal:
+        default_connection: psql
+        connections:
+            psql:
+                driver:   pdo_pgsql
+                host:     "%psql_host%"
+                port:     "%psql_port%"
+                dbname:   "%psql_name%"
+                user:     "%psql_user%"
+                password: "%psql_password%"
+                charset:  UTF8
+    orm:
+        auto_generate_proxy_classes: "%kernel.debug%"
+        default_entity_manager: psql
+        entity_managers:
+            psql:
+                connection: psql
+                naming_strategy: doctrine.orm.naming_strategy.underscore
+                mappings:
+                    AppBundle:
+                        type: annotation
+                        prefix: Evolaze\Paiod\AppBundle\Entity
+                        alias: AppBundle

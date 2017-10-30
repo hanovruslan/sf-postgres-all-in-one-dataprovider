@@ -1,0 +1,7 @@
+FROM postgres:10
+
+#ARG PORT
+#
+#ENV PORT $PORT
+#
+#EXPOSE $PORT

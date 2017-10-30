@@ -1,0 +1,5 @@
+vendor/*
+var/*
+.composer/*
+app/bootstrap.php.cache
+config/parameters.yml
