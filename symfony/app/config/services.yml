@@ -1,5 +1,6 @@
 parameters:
     app.security.user.class.token_user_provider: Evolaze\Paiod\AppBundle\Security\User\TokenUserProvider
+    app.provider.class.user: Evolaze\Paiod\AppBundle\Provider\UserProvider
     app.security.guard.class.token_authenticator: Evolaze\Paiod\AppBundle\Security\Guard\TokenGuardAuthenticator
     app.cache.adapter.class.pdo: Symfony\Component\Cache\Adapter\PdoAdapter
     app.cache.provider.class.pkeyvalue: Evolaze\Paiod\AppBundle\Cache\Provider\PkeyvalueProvider
@@ -9,9 +10,14 @@ services:
     app.controller.default:
         class: "%app.controller.class.default%"
         arguments:
-            - "@app.cache.provider"
+            - "@app.provider.user"
     app.security.authenticator_token:
         class: "%app.security.guard.class.token_authenticator%"
+    app.provider.user:
+        class: "%app.provider.class.user%"
+        arguments:
+            - "@doctrine.orm.psql_entity_manager"
+            - "@app.cache.provider"
     app.provider.user_token:
         class: "%app.security.user.class.token_user_provider%"
         arguments:

@@ -4,7 +4,7 @@ namespace Evolaze\Paiod\AppBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Evolaze\Paiod\AppBundle\Entity\Uzer;
+use Evolaze\Paiod\AppBundle\Entity\Uzer as User;
 
 class UserFixture implements FixtureInterface
 {
@@ -14,7 +14,7 @@ class UserFixture implements FixtureInterface
     public function load(ObjectManager $manager)
     {
         foreach (['foo', 'bar'] as $value) {
-            $user = new Uzer();
+            $user = new User();
             $user->setUsername($value);
             $user->setToken($value);
             $manager->persist($user);

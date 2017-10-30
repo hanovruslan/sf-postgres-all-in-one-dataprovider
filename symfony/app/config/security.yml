@@ -18,11 +18,5 @@ security:
             pattern: ^/
             provider: user_token
             stateless: true
-    role_hierarchy:
-        ROLE_ADMIN:
-            - ROLE_MANAGER
-            - ROLE_CLIENT
     access_control:
-        - { path: ^/admin, roles: ROLE_ADMIN }
-        - { path: ^/morozov, roles: ROLE_MANAGER }
         - { path: ^/, roles: ROLE_CLIENT }

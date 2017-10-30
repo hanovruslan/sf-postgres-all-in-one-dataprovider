@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="uzer")
  */
-class Uzer implements UserInterface
+class Uzer implements UserInterface, \Serializable
 {
     /**
      * @ORM\Id
@@ -31,6 +31,13 @@ class Uzer implements UserInterface
     public function getId()
     {
         return $this->id;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     public function getRoles()
@@ -92,5 +99,18 @@ class Uzer implements UserInterface
     public function getToken()
     {
         return $this->token;
+    }
+
+    public function serialize() {
+        return json_encode([
+            'id' => $this->getId(),
+            'username' => $this->getUsername(),
+        ]);
+    }
+
+    public function unserialize($serialized) {
+        $values = (array) json_decode($serialized);
+        $this->setId($values['id']);
+        $this->setUsername($values['username']);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Evolaze\Paiod\AppBundle\Security\User;
 
-use Evolaze\Paiod\AppBundle\Entity\Uzer;
+use Evolaze\Paiod\AppBundle\Entity\Uzer as User;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
@@ -14,7 +14,7 @@ class TokenUserProvider implements UserProviderInterface
     /** @var EntityManager */
     protected $entityManager;
 
-    protected $class = Uzer::class;
+    protected $class = User::class;
 
     public function __construct(EntityManager $entityManager)
     {
@@ -56,7 +56,7 @@ class TokenUserProvider implements UserProviderInterface
      */
     protected function loadUserByAttribute($name, $value = null)
     {
-        /** @var Uzer|null $user */
+        /** @var User|null $user */
         $user = null;
         $repository = $this->entityManager->getRepository($this->class);
         if (null !== $value) {
