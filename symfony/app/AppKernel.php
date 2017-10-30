@@ -9,15 +9,16 @@ class AppKernel extends Kernel
     public function registerBundles()
     {
         $bundles = [
-            new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
-            new Symfony\Bundle\SecurityBundle\SecurityBundle(),
-            new Symfony\Bundle\TwigBundle\TwigBundle(),
-            new Symfony\Bundle\MonologBundle\MonologBundle(),
-            new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
-            new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-            new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
-            new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
-            new AppBundle(),
+            new Symfony\Bundle\FrameworkBundle\FrameworkBundle,
+            new Symfony\Bundle\SecurityBundle\SecurityBundle,
+            new Symfony\Bundle\MonologBundle\MonologBundle,
+            new Symfony\Bundle\TwigBundle\TwigBundle,
+            new Doctrine\Bundle\DoctrineBundle\DoctrineBundle,
+            new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle,
+            new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle,
+            new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle,
+            new Dunglas\DoctrineJsonOdm\Bundle\DunglasDoctrineJsonOdmBundle,
+            new AppBundle,
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

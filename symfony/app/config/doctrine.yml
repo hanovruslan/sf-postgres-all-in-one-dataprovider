@@ -1,24 +1,62 @@
 doctrine:
     dbal:
-        default_connection: psql
+        default_connection: orm
         connections:
-            psql:
+            keyvalue:
                 driver:   pdo_pgsql
-                host:     "%psql_host%"
-                port:     "%psql_port%"
-                dbname:   "%psql_name%"
-                user:     "%psql_user%"
-                password: "%psql_password%"
+                host:     "%keyvalue_host%"
+                port:     "%keyvalue_port%"
+                dbname:   "%keyvalue_name%"
+                user:     "%keyvalue_user%"
+                password: "%keyvalue_password%"
+                charset:  UTF8
+            orm:
+                driver:   pdo_pgsql
+                host:     "%orm_host%"
+                port:     "%orm_port%"
+                dbname:   "%orm_name%"
+                user:     "%orm_user%"
+                password: "%orm_password%"
+                charset:  UTF8
+            odm:
+                driver:   pdo_pgsql
+                host:     "%odm_host%"
+                port:     "%odm_port%"
+                dbname:   "%odm_name%"
+                user:     "%odm_user%"
+                password: "%odm_password%"
                 charset:  UTF8
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
-        default_entity_manager: psql
+        default_entity_manager: orm
         entity_managers:
-            psql:
-                connection: psql
+            keyvalue:
+                connection: keyvalue
                 naming_strategy: doctrine.orm.naming_strategy.underscore
                 mappings:
-                    AppBundle:
+                    Keyvalue:
                         type: annotation
-                        prefix: Evolaze\Paiod\AppBundle\Entity
-                        alias: AppBundle
+                        prefix: Evolaze\Paiod\AppBundle\Entity\Keyvalue
+                        dir: src/AppBundle/Entity/Keyvalue
+                        alias: Keyvalue
+                        is_bundle: false
+            odm:
+                connection: odm
+                naming_strategy: doctrine.orm.naming_strategy.underscore
+                mappings:
+                    Odm:
+                        type: annotation
+                        prefix: Evolaze\Paiod\AppBundle\Entity\Odm
+                        dir: src/AppBundle/Entity/Odm
+                        alias: Odm
+                        is_bundle: false
+            orm:
+                connection: orm
+                naming_strategy: doctrine.orm.naming_strategy.underscore
+                mappings:
+                    Orm:
+                        type: annotation
+                        prefix: Evolaze\Paiod\AppBundle\Entity\Orm
+                        dir: src/AppBundle/Entity/Orm
+                        alias: Orm
+                        is_bundle: false

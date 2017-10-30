@@ -4,7 +4,7 @@ namespace Evolaze\Paiod\AppBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Evolaze\Paiod\AppBundle\Entity\Uzer as User;
+use Evolaze\Paiod\AppBundle\Entity\Orm\Uzer as User;
 
 class UserFixture implements FixtureInterface
 {

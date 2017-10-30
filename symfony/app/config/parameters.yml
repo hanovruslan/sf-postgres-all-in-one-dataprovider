@@ -1,13 +1,18 @@
 # This file is auto-generated during the composer install
 parameters:
-    psql_host: psql
-    psql_port: 5432
-    psql_name: app
-    psql_user: psql
-    psql_password: psql
+    keyvalue_host: keyvalue
+    keyvalue_port: 5432
+    keyvalue_name: keyvalue
+    keyvalue_user: keyvalue
+    keyvalue_password: keyvalue
+    orm_host: orm
+    orm_port: 5432
+    orm_name: orm
+    orm_user: orm
+    orm_password: orm
     secret: ThisTokenIsNotSoSecretChangeIt
-    pkeyvalue_host: pkeyvalue
-    pkeyvalue_port: 5432
-    pkeyvalue_name: pkeyvalue
-    pkeyvalue_user: pkeyvalue
-    pkeyvalue_password: pkeyvalue
+    odm_host: odm
+    odm_port: 5432
+    odm_name: odm
+    odm_user: odm
+    odm_password: odm

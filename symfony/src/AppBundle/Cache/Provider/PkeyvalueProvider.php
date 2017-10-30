@@ -4,7 +4,7 @@ namespace Evolaze\Paiod\AppBundle\Cache\Provider;
 
 use Symfony\Component\Cache\Adapter\PdoAdapter;
 
-class PkeyvalueProvider
+class KeyvalueProvider
 {
     /**
      * @var PdoAdapter
@@ -16,17 +16,16 @@ class PkeyvalueProvider
         $this->adapter = $adapter;
     }
 
-    public function getOrRefresh(String $key, \Closure $getter, \Closure $serialize, \Closure $unserialize)
+    public function getOrRefresh(String $key, \Closure $find, \Closure $serialize, \Closure $unserialize)
     {
-        $cacheItem = $this->adapter->getItem($key);
+        $item = $this->adapter->getItem($key);
         if (!$this->adapter->hasItem($key)) {
-            $value = $getter();
+            $result = $find();
             $this->adapter->save(
-                $cacheItem->set($serialize($value))
+                $item->set($serialize($result))
             );
-            $result = $value;
         } else {
-            $result = $unserialize($cacheItem->get());
+            $result = $unserialize($item->get());
         }
 
         return $result;

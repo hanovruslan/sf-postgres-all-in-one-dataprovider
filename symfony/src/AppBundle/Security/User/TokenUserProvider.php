@@ -2,7 +2,7 @@
 
 namespace Evolaze\Paiod\AppBundle\Security\User;
 
-use Evolaze\Paiod\AppBundle\Entity\Uzer as User;
+use Evolaze\Paiod\AppBundle\Entity\Orm\Uzer as User;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;

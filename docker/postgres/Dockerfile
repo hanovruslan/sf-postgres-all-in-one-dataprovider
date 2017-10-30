@@ -1,7 +1,7 @@
-FROM postgres:10
+#FROM postgres:10
 
-#ARG PORT
-#
-#ENV PORT $PORT
-#
-#EXPOSE $PORT
+ARG PORT
+
+ENV PORT $PORT
+
+EXPOSE $PORT

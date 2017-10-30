@@ -34,10 +34,6 @@ _docker_and_composer () {
   && curl -L ${docker_compose_url} > ${docker_compose_path} \
   && chmod +x ${docker_compose_path}
 }
-_env () {
-    echo export PKEYVALUE_PORT=4432
-    echo export PSQL_PORT=5432
-} >> /home/vagrant/.profile
 _has_docker || { \
   _locale \
   && _docker_and_composer \

@@ -2,7 +2,7 @@ version: "2"
 services:
     back:
         build: ./php-fpm
-        depends_on: ["psql", "pkeyvalue"]
+        depends_on: ["keyvalue", "odm", "orm"]
         environment:
             TERM: rxvt
         hostname: back
@@ -11,23 +11,32 @@ services:
         restart: always
         volumes:
             - ./../symfony:/usr/share/symfony
-    psql:
-        build: postgres
+    keyvalue:
+        image: postgres:10
         environment:
-            POSTGRES_PASSWORD: psql
-            POSTGRES_USER: psql
-        hostname: psql
+            POSTGRES_PASSWORD: keyvalue
+            POSTGRES_USER: keyvalue
+        hostname: keyvalue
         ports:
             - "5432:5432"
         restart: always
-    pkeyvalue:
-        build: postgres
+    orm:
+        image: postgres:10
         environment:
-            POSTGRES_PASSWORD: pkeyvalue
-            POSTGRES_USER: pkeyvalue
-        hostname: pkeyvalue
+            POSTGRES_PASSWORD: orm
+            POSTGRES_USER: orm
+        hostname: orm
         ports:
-            - "4432:5432"
+            - "15432:5432"
+        restart: always
+    odm:
+        image: postgres:10
+        environment:
+            POSTGRES_PASSWORD: odm
+            POSTGRES_USER: odm
+        hostname: odm
+        ports:
+            - "25432:5432"
         restart: always
     front:
         build: ./nginx
