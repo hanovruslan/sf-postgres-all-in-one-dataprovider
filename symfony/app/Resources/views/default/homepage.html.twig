@@ -4,6 +4,7 @@
 
 {% block body %}
 
-    timestamp = {{ timestamp }}
+    This is homepage {% if timestamp is not empty %}<br />
+    timestamp: {{ timestamp }}{% endif %}
 
 {% endblock %}

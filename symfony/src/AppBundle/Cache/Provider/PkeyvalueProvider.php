@@ -16,27 +16,19 @@ class PkeyvalueProvider
         $this->adapter = $adapter;
     }
 
-    /**
-     * @param String $key
-     * @param mixed $value
-     *
-     * @return mixed
-     */
-    public function touch(String $key, $value)
+    public function getOrRefresh(String $key, \Closure $getter, \Closure $serialize, \Closure $unserialize)
     {
-        $this->adapter->save(
-            $this->adapter->getItem($key)->set($value)
-        );
+        $cacheItem = $this->adapter->getItem($key);
+        if (!$this->adapter->hasItem($key)) {
+            $value = $getter();
+            $this->adapter->save(
+                $cacheItem->set($serialize($value))
+            );
+            $result = $value;
+        } else {
+            $result = $unserialize($cacheItem->get());
+        }
 
-        return $this->get($key);
-    }
-
-    /**
-     * @param String $key
-     * @return mixed
-     */
-    public function get(String $key)
-    {
-        return $this->adapter->getItem($key)->get();
+        return $result;
     }
 }
