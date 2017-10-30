@@ -3,5 +3,12 @@
 {% block title %}Morozov{% endblock %}
 
 {% block body %}
-Morozov
+    <ul>
+        {% for message in messages %}
+            <li>{{ message.body|e }}</li>
+        {% else %}
+            <li><em>no message found</em></li>
+        {% endfor %}
+    </ul>
+
 {% endblock %}

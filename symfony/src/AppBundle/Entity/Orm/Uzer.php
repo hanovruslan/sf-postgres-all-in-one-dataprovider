@@ -1,6 +1,6 @@
 <?
 
-namespace Evolaze\Paiod\AppBundle\Entity;
+namespace Evolaze\Paiod\AppBundle\Entity\Orm;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\Mapping as ORM;

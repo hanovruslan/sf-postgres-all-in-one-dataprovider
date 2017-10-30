@@ -2,9 +2,9 @@
 
 namespace Evolaze\Paiod\AppBundle\Provider;
 
-use Evolaze\Paiod\AppBundle\Cache\Provider\PkeyvalueProvider;
 use Doctrine\ORM\EntityManager;
-use Evolaze\Paiod\AppBundle\Entity\Uzer as User;
+use Evolaze\Paiod\AppBundle\Cache\Provider\KeyvalueProvider;
+use Evolaze\Paiod\AppBundle\Entity\Orm\Uzer as User;
 
 class UserProvider
 {
@@ -13,23 +13,25 @@ class UserProvider
      */
     private $entityManager;
     /**
-     * @var PkeyvalueProvider
+     * @var KeyvalueProvider
      */
     private $cacheProvider;
 
     public function __construct(
         EntityManager $entityManager,
-        PkeyvalueProvider $cacheProvider
+        KeyvalueProvider $cacheProvider
     ) {
         $this->entityManager = $entityManager;
         $this->cacheProvider = $cacheProvider;
     }
 
     public function findAll(): array {
-        $getter = function () {
-            return $this->entityManager->getRepository(User::class)->findAll();
+        $find = function () {
+            return $this->entityManager
+                ->getRepository(User::class)
+                ->findAll();
         };
-        $serializer = function (array $array) {
+        $serialize = function (array $array) {
             $result = [];
             foreach ($array as $item) {
                 $result[] = serialize($item);
@@ -46,6 +48,7 @@ class UserProvider
             return $result;
         };
 
-        return $this->cacheProvider->getOrRefresh('users', $getter, $serializer, $unserialize);
+        return $this->cacheProvider
+            ->getOrRefresh('users', $find, $serialize, $unserialize);
     }
 }

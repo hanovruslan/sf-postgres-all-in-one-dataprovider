@@ -4,3 +4,6 @@ homepage:
 users:
     path:     /users
     defaults: { _controller: app.controller.default:usersAction }
+messages:
+    path:     /messages
+    defaults: { _controller: app.controller.default:messagesAction }
